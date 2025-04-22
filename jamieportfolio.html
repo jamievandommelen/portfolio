@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌸 Jamie's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rose: #f3cce3;
+      --sage: #d6eadf;
+      --periwinkle: #d8d6f3;
+      --golden: #fff6cc;
+      --text-dark: #2c2c2c;
+      --text-muted: #5e5e5e;
+      --bg: #fefcf9;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, var(--rose), var(--periwinkle));
+      border-bottom: 6px double var(--sage);
+    }
+
+    @media (min-width: 600px) {
+      header {
+        flex-direction: row;
+        justify-content: center;
+        text-align: left;
+      }
+
+      .intro {
+        text-align: left;
+      }
+    }
+
+    .profile-pic {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .intro {
+      max-width: 500px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--text-dark);
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: white;
+      padding: 1rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      border: 1px solid var(--periwinkle);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      max-height: 180px;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0 0 0;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .card p {
+      color: var(--text-muted);
+    }
+
+    .contact {
+      text-align: center;
+      margin-top: 4rem;
+      background-color: var(--sage);
+      padding: 2rem;
+      border-radius: 20px;
+    }
+
+    .contact h2 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .contact a {
+      color: #333;
+      font-weight: bold;
+      text-decoration: none;
+      background: white;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      display: inline-block;
+      margin-top: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: background 0.3s;
+    }
+
+    .contact a:hover {
+      background: var(--rose);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="image.png" alt="Your profile picture" class="profile-pic">
+    <div class="intro">
+      <h1>🌸 Jamie Van Dommelen</h1>
+      <p>Web Developer | IT Analyst with 5+ years of building web solutions that solve real business problems.</p>
+    </div>
+  </header>
+
+  <section>
+    <h2>🌼 Featured Projects</h2>
+    <div class="projects">
+      <div class="card">
+        <img src="plant-plugin.png" alt="Screenshot of Magical Garden Game">
+        <h3>🌷 Plant Watering Reminder Plugin</h3>
+        <p>This is a simple yet powerful plugin for the macOS xbar application that reminds you when to water your plants. It tracks the last watered date and alerts you when it's time to give your plants some love.</p>
+      </div>
+      <div class="card">
+        <img src="airbnb.png" alt="Screenshot of Recipe Fairy">
+        <h3>🍄 A1rbnb Clone</h3>
+        <p>An a1rbnb clone using ruby on rails backend and react frontend. I am constanlty adding new features to build my knowledge</p>
+      </div>
+      <div class="card">
+        <img src="project3.jpg" alt="Screenshot of Weather Pixie">
+        <h3>☁️ Record Player</h3>
+        <p>An animated fairy that reflects your local weather with a sprinkle of magic. Uses the OpenWeather API.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2>💌 Let's Connect</h2>
+    <p>I’d love to chat about code, design, or AI ✨</p>
+    <a href="mailto:vandommelen.jamie@gmail.com">Send me a email</a>
+    <a href="https://www.linkedin.com/in/jamie-van-dommelen/">Follow me on Linkedin</a>
+  </section>
+</body>
+</html>
