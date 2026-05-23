@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Jamie Van Dommelen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+    :root {
+      --cream: #F4F0E8;
+      --purple-dark: #2D1B69;
+      --purple-mid: #5B3FBF;
+      --purple-light: #9B7FE8;
+      --purple-pale: #EAE4FF;
+      --off-black: #0E0A1A;
+      --muted: #7A6E99;
+    }
+ 
+    html, body {
+      min-height: 100%;
+      background: var(--cream);
+      color: var(--off-black);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+ 
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.4;
+    }
+ 
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+    }
+ 
+    .nav-meta {
+      display: flex;
+      gap: 2rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 300;
+    }
+ 
+    .nav-meta .dot {
+      width: 6px; height: 6px;
+      background: var(--purple-mid);
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 0.4rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+ 
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+ 
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+ 
+    .nav-links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--off-black);
+      text-decoration: none;
+      font-weight: 400;
+      transition: color 0.2s;
+      position: relative;
+    }
+ 
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: var(--purple-mid);
+      transition: width 0.3s ease;
+    }
+ 
+    .nav-links a:hover { color: var(--purple-mid); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--purple-mid); }
+    .nav-links a.active::after { width: 100%; }
+ 
+    /* PAGE */
+    .page {
+      padding: 9rem 3rem 6rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+ 
+    .page-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+ 
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+ 
+    .page-heading {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3rem, 7vw, 7rem);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      margin-bottom: 5rem;
+      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+    }
+ 
+    .page-heading em {
+      font-style: normal;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--off-black);
+    }
+ 
+    /* PROJECT LIST */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+ 
+    .project-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid rgba(14, 10, 26, 0.1);
+      padding: 4rem 0;
+      align-items: center;
+      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+ 
+    .project-item:nth-child(1) { animation-delay: 0.15s; }
+    .project-item:nth-child(2) { animation-delay: 0.25s; }
+    .project-item:nth-child(3) { animation-delay: 0.35s; }
+ 
+    .project-item:last-child { border-bottom: 1px solid rgba(14, 10, 26, 0.1); }
+ 
+    /* Alternate image left/right */
+    .project-item:nth-child(even) .project-image { order: 2; }
+    .project-item:nth-child(even) .project-info { order: 1; }
+ 
+    /* IMAGE */
+    .project-image {
+      overflow: hidden;
+      position: relative;
+    }
+ 
+    .project-image img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+ 
+    .project-item:hover .project-image img {
+      transform: scale(1.03);
+    }
+ 
+    .project-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(45, 27, 105, 0);
+      transition: background 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+ 
+    .project-item:hover .project-image-overlay {
+      background: rgba(45, 27, 105, 0.08);
+    }
+ 
+    /* INFO */
+    .project-info {
+      padding: 0 3rem;
+    }
+ 
+    .project-number {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 900;
+      font-size: 5rem;
+      color: var(--purple-pale);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+ 
+    .project-type {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+ 
+    .project-name {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--off-black);
+      margin-bottom: 1.25rem;
+    }
+ 
+    .project-desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #4A4060;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+ 
+    /* TECH STACK */
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+ 
+    .tech-tag {
+      padding: 0.3rem 0.8rem;
+      background: var(--purple-pale);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple-dark);
+    }
+ 
+    /* PROJECT LINKS */
+    .project-links {
+      display: flex;
+      gap: 1rem;
+    }
+ 
+    .project-link {
+      display: inline-block;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 400;
+      transition: all 0.25s ease;
+      font-family: 'DM Sans', sans-serif;
+    }
+ 
+    .link-primary {
+      background: var(--off-black);
+      color: var(--cream);
+    }
+ 
+    .link-primary:hover { background: var(--purple-dark); }
+ 
+    .link-secondary {
+      border: 1px solid rgba(14, 10, 26, 0.2);
+      color: var(--off-black);
+    }
+ 
+    .link-secondary:hover {
+      border-color: var(--off-black);
+      background: var(--off-black);
+      color: var(--cream);
+    }
+ 
+    /* FOOTER */
+    footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid rgba(14, 10, 26, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4rem;
+    }
+ 
+    footer .foot-left {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+ 
+    footer .foot-right { display: flex; gap: 2rem; }
+ 
+    footer a {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+ 
+    footer a:hover { color: var(--purple-mid); }
+ 
+    @media (max-width: 768px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-meta { display: none; }
+      .page { padding: 7rem 1.5rem 4rem; }
+      .project-item { grid-template-columns: 1fr; gap: 2rem; }
+      .project-item:nth-child(even) .project-image { order: 0; }
+      .project-item:nth-child(even) .project-info { order: 0; }
+      .project-info { padding: 0; }
+      .project-image img { height: 240px; }
+      .project-number { font-size: 3rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+ 
+  <nav>
+    <div class="nav-meta">
+      <span><span class="dot"></span>Fairfax, VA</span>
+      <span>Open to Work</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="bio.html">Bio</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+ 
+  <div class="page">
+    <p class="page-label">Selected Work</p>
+    <h1 class="page-heading">My<br><em>Projects</em></h1>
+ 
+    <div class="project-list">
+ 
+      <!-- PROJECT 1: RECORD PLAYER -->
+      <div class="project-item">
+        <div class="project-image">
+          <img src="spotify.png" alt="Record Player Spotify App" />
+          <div class="project-image-overlay"></div>
+        </div>
+        <div class="project-info">
+          <div class="project-number">01</div>
+          <p class="project-type">Full Stack Development</p>
+          <h2 class="project-name">Record Player</h2>
+          <p class="project-desc">A playful vinyl record player application powered by the Spotify API. Users connect their Spotify account and play their music through a custom-designed interface complete with a record player animation. Built to blend thoughtful design with functional code.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Spotify API</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/jamievandommelen" target="_blank" class="project-link link-primary">View on GitHub</a>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- PROJECT 2: PLANT PLUGIN -->
+      <div class="project-item">
+        <div class="project-image">
+          <img src="plant-plugin.png" alt="Plant Watering Reminder Plugin" />
+          <div class="project-image-overlay"></div>
+        </div>
+        <div class="project-info">
+          <div class="project-number">02</div>
+          <p class="project-type">Plugin Development</p>
+          <h2 class="project-name">Plant Watering Reminder</h2>
+          <p class="project-desc">A simple but powerful plugin for the macOS xbar application that reminds you when to water your plants. Tracks the last watered date and sends an alert when it's time to give your plants some love — because even developers forget.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">xbar</span>
+            <span class="tech-tag">macOS</span>
+            <span class="tech-tag">Plugin Dev</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/jamievandommelen" target="_blank" class="project-link link-primary">View on GitHub</a>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- PROJECT 3: AIRBNB CLONE -->
+      <div class="project-item">
+        <div class="project-image">
+          <img src="airbnb.png" alt="Airbnb Clone" />
+          <div class="project-image-overlay"></div>
+        </div>
+        <div class="project-info">
+          <div class="project-number">03</div>
+          <p class="project-type">Full Stack Development</p>
+          <h2 class="project-name">Airbnb Clone</h2>
+          <p class="project-desc">A full stack Airbnb clone built with a Ruby on Rails backend and a React frontend. Continuously enhanced with new features to deepen understanding of full stack architecture and improve overall skill set.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">Ruby on Rails</span>
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Full Stack</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/jamievandommelen" target="_blank" class="project-link link-primary">View on GitHub</a>
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+ 
+  <footer>
+    <span class="foot-left">© 2026 Jamie Van Dommelen</span>
+    <div class="foot-right">
+      <a href="mailto:vandommelen.jamie@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/jamie-van-dommelen/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/jamievandommelen" target="_blank">GitHub</a>
+    </div>
+  </footer>
+ 
+</body>
+</html>
