@@ -3,189 +3,668 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🌸 Jamie's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+  <title>Jamie Van Dommelen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
   <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+ 
     :root {
-      --rose: #f3cce3;
-      --sage: #d6eadf;
-      --periwinkle: #d8d6f3;
-      --golden: #fff6cc;
-      --text-dark: #2c2c2c;
-      --text-muted: #5e5e5e;
-      --bg: #fefcf9;
+      --cream: #F4F0E8;
+      --purple-dark: #2D1B69;
+      --purple-mid: #5B3FBF;
+      --purple-light: #9B7FE8;
+      --purple-pale: #EAE4FF;
+      --off-black: #0E0A1A;
+      --muted: #7A6E99;
     }
-
-    body {
-      margin: 0;
-      font-family: 'Quicksand', sans-serif;
-      background: var(--bg);
-      color: var(--text-dark);
+ 
+    html, body {
+      height: 100%;
+      background: var(--cream);
+      color: var(--off-black);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
     }
-
-    header {
+ 
+    /* NOISE TEXTURE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.4;
+    }
+ 
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      text-align: center;
-      gap: 1.5rem;
-      padding: 4rem 2rem;
-      background: linear-gradient(135deg, var(--rose), var(--periwinkle));
-      border-bottom: 6px double var(--sage);
+      padding: 1.5rem 3rem;
+      mix-blend-mode: multiply;
     }
-
-    @media (min-width: 600px) {
-      header {
-        flex-direction: row;
-        justify-content: center;
-        text-align: left;
-      }
-
-      .intro {
-        text-align: left;
-      }
+ 
+    .nav-meta {
+      display: flex;
+      gap: 2rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 300;
     }
-
-    .profile-pic {
-      width: 160px;
-      height: 160px;
+ 
+    .nav-meta span { display: flex; align-items: center; gap: 0.4rem; }
+    .nav-meta .dot {
+      width: 6px; height: 6px;
+      background: var(--purple-mid);
       border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid white;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      animation: pulse 2s ease-in-out infinite;
     }
-
-    .intro {
-      max-width: 500px;
-      font-family: 'Playfair Display', serif;
+ 
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
     }
-
-    header h1 {
-      font-size: 3rem;
-      margin: 0;
+ 
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
     }
-
-    header p {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      margin-top: 0.5rem;
+ 
+    .nav-links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--off-black);
+      text-decoration: none;
+      font-weight: 400;
+      transition: color 0.2s;
+      position: relative;
     }
-
-    section {
-      padding: 2rem;
-      max-width: 1000px;
-      margin: auto;
+ 
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--purple-mid);
+      transition: width 0.3s ease;
     }
-
-    section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: var(--text-dark);
-    }
-
-    .projects {
+ 
+    .nav-links a:hover { color: var(--purple-mid); }
+    .nav-links a:hover::after { width: 100%; }
+ 
+    /* HERO */
+    .hero {
+      min-height: 100vh;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-rows: 1fr auto;
+      padding: 0 3rem 3rem;
+      position: relative;
     }
-
-    .card {
-      background: white;
-      padding: 1rem;
-      border-radius: 16px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      border: 1px solid var(--periwinkle);
-      transition: transform 0.3s ease;
+ 
+    .hero-main {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      justify-content: center;
+      padding-top: 6rem;
+      position: relative;
     }
-
-    .card:hover {
-      transform: translateY(-5px);
+ 
+    /* BIG NAME */
+    .name-display {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 900;
+      font-size: clamp(5rem, 13vw, 13rem);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      color: var(--off-black);
+      position: relative;
+      z-index: 2;
+      animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
-
-    .card img {
-      width: 100%;
-      border-radius: 12px;
-      object-fit: cover;
-      max-height: 180px;
+ 
+    .name-display .line2 {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--off-black);
+      animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
     }
-
-    .card h3 {
-      margin: 0.5rem 0 0 0;
-      font-family: 'Playfair Display', serif;
+ 
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(60px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    .card p {
-      color: var(--text-muted);
-    }
-
-    .contact {
-      text-align: center;
-      margin-top: 4rem;
-      background-color: var(--sage);
-      padding: 2rem;
-      border-radius: 20px;
-    }
-
-    .contact h2 {
-      font-family: 'Playfair Display', serif;
-    }
-
-    .contact a {
-      color: #333;
-      font-weight: bold;
-      text-decoration: none;
+ 
+    /* FLOATING PROJECT CARD */
+    .floating-card {
+      position: absolute;
+      right: 4%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 280px;
       background: white;
-      padding: 0.5rem 1rem;
-      border-radius: 10px;
-      display: inline-block;
-      margin-top: 1rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: background 0.3s;
+      border: 1px solid rgba(91, 63, 191, 0.15);
+      z-index: 3;
+      animation: floatIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
-    .contact a:hover {
-      background: var(--rose);
+ 
+    .floating-card:hover {
+      transform: translateY(calc(-50% - 6px));
+      box-shadow: 0 20px 60px rgba(45, 27, 105, 0.15);
+    }
+ 
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(calc(-50% + 30px)); }
+      to { opacity: 1; transform: translateY(-50%); }
+    }
+ 
+    .card-label {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 1rem 0.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+ 
+    .card-image {
+      width: 100%;
+      height: 160px;
+      background: linear-gradient(135deg, var(--purple-pale) 0%, #d4c6ff 50%, var(--purple-light) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--purple-mid);
+      text-transform: uppercase;
+      overflow: hidden;
+      position: relative;
+    }
+ 
+    .card-image svg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+    }
+ 
+    .card-title {
+      padding: 0.75rem 1rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--off-black);
+      letter-spacing: 0.01em;
+    }
+ 
+    /* TAGLINE ROW */
+    .tagline-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 1.5rem;
+      animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+    }
+ 
+    .tagline-left {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 4vw, 3.5rem);
+      color: var(--off-black);
+      line-height: 1;
+    }
+ 
+    .tagline-right {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 4vw, 3.5rem);
+      color: var(--off-black);
+      line-height: 1;
+      text-align: right;
+    }
+ 
+    /* PURPLE ACCENT BLOB */
+    .blob {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(155, 127, 232, 0.18) 0%, transparent 70%);
+      border-radius: 50%;
+      left: -100px;
+      bottom: -100px;
+      pointer-events: none;
+      z-index: 1;
+    }
+ 
+    /* BOTTOM BAR */
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(14, 10, 26, 0.1);
+      animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+    }
+ 
+    .hero-bottom-left {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 300px;
+      line-height: 1.6;
+    }
+ 
+    .hero-bottom-right {
+      display: flex;
+      gap: 1rem;
+    }
+ 
+    .cta-btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 400;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+ 
+    .cta-primary {
+      background: var(--off-black);
+      color: var(--cream);
+    }
+ 
+    .cta-primary:hover {
+      background: var(--purple-dark);
+    }
+ 
+    .cta-secondary {
+      border: 1px solid var(--off-black);
+      color: var(--off-black);
+      background: transparent;
+    }
+ 
+    .cta-secondary:hover {
+      background: var(--off-black);
+      color: var(--cream);
+    }
+ 
+    /* MARQUEE */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid rgba(14, 10, 26, 0.08);
+      border-bottom: 1px solid rgba(14, 10, 26, 0.08);
+      padding: 0.9rem 0;
+      background: var(--purple-pale);
+    }
+ 
+    .marquee-track {
+      display: flex;
+      gap: 3rem;
+      animation: marquee 18s linear infinite;
+      width: max-content;
+    }
+ 
+    .marquee-track span {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--purple-dark);
+      white-space: nowrap;
+      font-weight: 400;
+    }
+ 
+    .marquee-track .sep {
+      color: var(--purple-light);
+    }
+ 
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+ 
+    /* ABOUT STRIP */
+    .about-strip {
+      padding: 6rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+ 
+    .about-strip h2 {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+    }
+ 
+    .about-strip h2 em {
+      font-style: normal;
+      color: var(--purple-mid);
+    }
+ 
+    .about-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #4A4060;
+      font-weight: 300;
+    }
+ 
+    .about-text p + p { margin-top: 1rem; }
+ 
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+ 
+    .tag {
+      padding: 0.35rem 0.9rem;
+      border: 1px solid rgba(91, 63, 191, 0.3);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple-mid);
+    }
+ 
+    /* PROJECTS SECTION */
+    .projects-section {
+      padding: 4rem 3rem 6rem;
+      border-top: 1px solid rgba(14, 10, 26, 0.08);
+    }
+ 
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+ 
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+ 
+    .project-card {
+      border: 1px solid rgba(14, 10, 26, 0.08);
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+ 
+    .project-card:hover { border-color: var(--purple-light); }
+ 
+    .project-card:hover .project-thumb { transform: scale(1.03); }
+ 
+    .project-thumb-wrap { overflow: hidden; }
+ 
+    .project-thumb {
+      height: 200px;
+      transition: transform 0.5s ease;
+    }
+ 
+    .thumb-1 { background: linear-gradient(135deg, #EAE4FF, #C4B0FF); display: flex; align-items: center; justify-content: center; }
+    .thumb-2 { background: linear-gradient(135deg, #FFF0F5, #FFD6E7); display: flex; align-items: center; justify-content: center; }
+    .thumb-3 { background: linear-gradient(135deg, #E8F4FF, #C0DAFF); display: flex; align-items: center; justify-content: center; }
+ 
+    .thumb-icon {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 900;
+      font-size: 4rem;
+      opacity: 0.2;
+    }
+ 
+    .project-info {
+      padding: 1.25rem;
+      border-top: 1px solid rgba(14, 10, 26, 0.06);
+    }
+ 
+    .project-type {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+ 
+    .project-name {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--off-black);
+    }
+ 
+    /* FOOTER */
+    footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid rgba(14, 10, 26, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+ 
+    footer .foot-left {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+ 
+    footer .foot-right {
+      display: flex;
+      gap: 2rem;
+    }
+ 
+    footer a {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+ 
+    footer a:hover { color: var(--purple-mid); }
+ 
+    @media (max-width: 768px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-meta { display: none; }
+      .hero { padding: 0 1.5rem 2rem; }
+      .name-display { font-size: 4rem; }
+      .floating-card { display: none; }
+      .tagline-left, .tagline-right { font-size: 1.5rem; }
+      .about-strip { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .projects-section { padding: 3rem 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="image.png" alt="Your profile picture" class="profile-pic">
-    <div class="intro">
-      <h1>🌸 Jamie Van Dommelen</h1>
-      <p>Web Developer | IT Analyst with 5+ years of building web solutions that solve real business problems</p>
+ 
+  <!-- NAV -->
+  <nav>
+    <div class="nav-meta">
+      <span><span class="dot"></span> Fairfax, VA</span>
+      <span>Open to Work</span>
     </div>
-  </header>
-
-  <section>
-    <h2>🌼 Featured Projects</h2>
-    <div class="projects">
-      <div class="card">
-        <img src="plant-plugin.png" alt="Screenshot of Magical Garden Game">
-        <h3>🌷 Plant Watering Reminder Plugin</h3>
-        <p>This is a simple yet powerful plugin for the macOS xbar application that reminds you when to water your plants. It tracks the last watered date and alerts you when it's time to give your plants some love.</p>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="bio.html">Bio</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+ 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-main">
+      <div class="blob"></div>
+ 
+      <h1 class="name-display">
+        <span class="line1">JAMIE</span><br>
+        <span class="line2">VAN DOMMELEN</span>
+      </h1>
+ 
+      <!-- FLOATING CARD -->
+      <div class="floating-card">
+        <div class="card-label">
+          <span>Featured Project</span>
+          <span>2024</span>
+        </div>
+        <div class="card-image">
+          <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg">
+            <rect width="280" height="160" fill="#EAE4FF"/>
+            <circle cx="60" cy="80" r="40" fill="#9B7FE8" opacity="0.3"/>
+            <circle cx="140" cy="50" r="30" fill="#5B3FBF" opacity="0.2"/>
+            <circle cx="220" cy="90" r="50" fill="#9B7FE8" opacity="0.25"/>
+            <rect x="40" y="60" width="200" height="2" fill="#5B3FBF" opacity="0.15"/>
+            <rect x="40" y="80" width="150" height="2" fill="#5B3FBF" opacity="0.15"/>
+            <rect x="40" y="100" width="175" height="2" fill="#5B3FBF" opacity="0.15"/>
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="'Unbounded', sans-serif" font-size="9" fill="#5B3FBF" opacity="0.6" letter-spacing="3">SPOTIFY API</text>
+          </svg>
+        </div>
+        <div class="card-title">Record Player — Spotify API Integration</div>
       </div>
-      <div class="card">
-        <img src="airbnb.png" alt="Screenshot of Recipe Fairy">
-        <h3>✨ Airbnb Clone</h3>
-        <p>A full-stack Airbnb clone built with a Ruby on Rails backend and a React frontend. Continuously enhancing the app with new features to deepen my understanding of web development and improve my skill set.</p>
+ 
+      <div class="tagline-row">
+        <span class="tagline-left">A Strategic</span>
+        <span class="tagline-right">& Creative Thinker</span>
       </div>
-      <div class="card">
-        <img src="spotify.png" alt="Screenshot of Record Player">
-        <h3>☁️ Record Player</h3>
-        <p> A playful vinyl record player powered by the Spotify API. Users can log into their Spotify account to play their music through a charming, custom-designed interface. This project highlights my passion for blending thoughtful design with functional code.</p>
+    </div>
+ 
+    <div class="hero-bottom">
+      <p class="hero-bottom-left">
+        Business Analyst &amp; Product Thinker with 5+ years across federal agencies, financial institutions, and SaaS platforms.
+      </p>
+      <div class="hero-bottom-right">
+        <a href="portfolio.html" class="cta-btn cta-primary">View Work</a>
+        <a href="contact.html" class="cta-btn cta-secondary">Get in Touch</a>
       </div>
     </div>
   </section>
-
-  <section class="contact">
-    <h2>💌 Let's Connect</h2>
-    <p>I’d love to chat about code, design, or job opportunities ✨</p>
-    <a href="mailto:vandommelen.jamie@gmail.com">Send me an email</a>
-    <a href="https://www.linkedin.com/in/jamie-van-dommelen/">Follow me on Linkedin</a>
+ 
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>Business Analysis</span><span class="sep">✦</span>
+      <span>Product Management</span><span class="sep">✦</span>
+      <span>Agile Delivery</span><span class="sep">✦</span>
+      <span>Requirements Elicitation</span><span class="sep">✦</span>
+      <span>Stakeholder Engagement</span><span class="sep">✦</span>
+      <span>Data Analytics</span><span class="sep">✦</span>
+      <span>UI/UX Design</span><span class="sep">✦</span>
+      <span>Federal Clients</span><span class="sep">✦</span>
+      <span>Financial Services</span><span class="sep">✦</span>
+      <span>Business Analysis</span><span class="sep">✦</span>
+      <span>Product Management</span><span class="sep">✦</span>
+      <span>Agile Delivery</span><span class="sep">✦</span>
+      <span>Requirements Elicitation</span><span class="sep">✦</span>
+      <span>Stakeholder Engagement</span><span class="sep">✦</span>
+      <span>Data Analytics</span><span class="sep">✦</span>
+      <span>UI/UX Design</span><span class="sep">✦</span>
+      <span>Federal Clients</span><span class="sep">✦</span>
+      <span>Financial Services</span><span class="sep">✦</span>
+    </div>
+  </div>
+ 
+  <!-- ABOUT STRIP -->
+  <section class="about-strip">
+    <h2>Where Business<br>Meets <em>Technology</em></h2>
+    <div>
+      <div class="about-text">
+        <p>I'm a Business Analyst and creative problem solver who sits comfortably at the intersection of people, process, and technology. My background spans federal agencies, financial institutions, and SaaS platforms — always as the person bridging the gap between what a business needs and what a technical team builds.</p>
+        <p>I bring the analytical rigor of a seasoned BA and the design sensibility of someone who genuinely cares about how things look and feel.</p>
+      </div>
+      <div class="about-tags">
+        <span class="tag">Freddie Mac</span>
+        <span class="tag">Fannie Mae</span>
+        <span class="tag">DoD & VA</span>
+        <span class="tag">Agile / Scrum</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Figma</span>
+        <span class="tag">Jira</span>
+        <span class="tag">Snowflake</span>
+      </div>
+    </div>
   </section>
+ 
+  <!-- PROJECTS PREVIEW -->
+  <section class="projects-section">
+    <p class="section-label">Selected Work</p>
+    <div class="projects-grid">
+      <a href="portfolio.html" class="project-card">
+        <div class="project-thumb-wrap">
+          <div class="project-thumb thumb-1">
+            <span class="thumb-icon" style="color:#5B3FBF">♪</span>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-type">Full Stack Development</p>
+          <p class="project-name">Record Player — Spotify API</p>
+        </div>
+      </a>
+      <a href="portfolio.html" class="project-card">
+        <div class="project-thumb-wrap">
+          <div class="project-thumb thumb-2">
+            <span class="thumb-icon" style="color:#D4537E">🌿</span>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-type">Plugin Development</p>
+          <p class="project-name">Plant Watering Reminder Plugin</p>
+        </div>
+      </a>
+      <a href="portfolio.html" class="project-card">
+        <div class="project-thumb-wrap">
+          <div class="project-thumb thumb-3">
+            <span class="thumb-icon" style="color:#185FA5">⌂</span>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-type">Full Stack Development</p>
+          <p class="project-name">Airbnb Clone — Rails + React</p>
+        </div>
+      </a>
+    </div>
+  </section>
+ 
+  <!-- FOOTER -->
+  <footer>
+    <span class="foot-left">© 2026 Jamie Van Dommelen</span>
+    <div class="foot-right">
+      <a href="mailto:vandommelen.jamie@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/jamie-van-dommelen/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/jamievandommelen" target="_blank">GitHub</a>
+    </div>
+  </footer>
+ 
 </body>
 </html>
