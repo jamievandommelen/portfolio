@@ -38,12 +38,9 @@
       opacity: 0.4;
     }
  
-    /* NAV */
     nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 50;
       display: flex;
       justify-content: space-between;
@@ -106,14 +103,12 @@
     .nav-links a.active { color: var(--purple-mid); }
     .nav-links a.active::after { width: 100%; }
  
-    /* PAGE WRAPPER */
     .page {
       padding: 9rem 3rem 6rem;
       max-width: 1200px;
       margin: 0 auto;
     }
  
-    /* PAGE LABEL */
     .page-label {
       font-size: 0.65rem;
       letter-spacing: 0.18em;
@@ -128,7 +123,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
  
-    /* BIO GRID */
     .bio-grid {
       display: grid;
       grid-template-columns: 1fr 1.4fr;
@@ -136,7 +130,6 @@
       align-items: start;
     }
  
-    /* PHOTO SIDE */
     .photo-col {
       animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
     }
@@ -145,7 +138,6 @@
       position: relative;
       width: 100%;
       aspect-ratio: 3/4;
-      background: var(--purple-pale);
       overflow: hidden;
     }
  
@@ -156,47 +148,11 @@
       display: block;
     }
  
-    .photo-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      background: linear-gradient(160deg, var(--purple-pale) 0%, #d4c6ff 100%);
-    }
- 
-    .photo-placeholder .upload-icon {
-      width: 48px;
-      height: 48px;
-      border: 1.5px solid var(--purple-mid);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
- 
-    .photo-placeholder .upload-icon svg {
-      width: 20px;
-      height: 20px;
-      stroke: var(--purple-mid);
-      fill: none;
-      stroke-width: 1.5;
-    }
- 
-    .photo-placeholder p {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--purple-mid);
-    }
- 
     .photo-accent {
       position: absolute;
-      bottom: -1px;
-      left: -1px;
-      right: -1px;
+      bottom: 0;
+      left: 0;
+      right: 0;
       height: 4px;
       background: var(--purple-mid);
     }
@@ -209,7 +165,6 @@
       color: var(--muted);
     }
  
-    /* HATS ROW */
     .hats-row {
       display: flex;
       flex-wrap: wrap;
@@ -226,7 +181,6 @@
       color: var(--purple-dark);
     }
  
-    /* TEXT SIDE */
     .bio-col {
       animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
     }
@@ -260,7 +214,6 @@
       color: var(--off-black);
     }
  
-    /* DIVIDER */
     .bio-divider {
       width: 40px;
       height: 2px;
@@ -268,7 +221,6 @@
       margin: 2rem 0;
     }
  
-    /* STATS ROW */
     .stats-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -300,7 +252,6 @@
       color: var(--muted);
     }
  
-    /* CTA ROW */
     .cta-row {
       display: flex;
       gap: 1rem;
@@ -319,25 +270,11 @@
       font-family: 'DM Sans', sans-serif;
     }
  
-    .cta-primary {
-      background: var(--off-black);
-      color: var(--cream);
-    }
- 
+    .cta-primary { background: var(--off-black); color: var(--cream); }
     .cta-primary:hover { background: var(--purple-dark); }
+    .cta-secondary { border: 1px solid var(--off-black); color: var(--off-black); background: transparent; }
+    .cta-secondary:hover { background: var(--off-black); color: var(--cream); }
  
-    .cta-secondary {
-      border: 1px solid var(--off-black);
-      color: var(--off-black);
-      background: transparent;
-    }
- 
-    .cta-secondary:hover {
-      background: var(--off-black);
-      color: var(--cream);
-    }
- 
-    /* FOOTER */
     footer {
       padding: 2rem 3rem;
       border-top: 1px solid rgba(14, 10, 26, 0.08);
@@ -347,23 +284,9 @@
       margin-top: 4rem;
     }
  
-    footer .foot-left {
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
- 
+    footer .foot-left { font-size: 0.7rem; letter-spacing: 0.08em; color: var(--muted); }
     footer .foot-right { display: flex; gap: 2rem; }
- 
-    footer a {
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
- 
+    footer a { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--purple-mid); }
  
     @media (max-width: 768px) {
@@ -381,7 +304,7 @@
  
   <nav>
     <div class="nav-meta">
-      <span><span class="dot"></span>Tysons, VA</span>
+      <span><span class="dot"></span>Washington, DC</span>
       <span>Open to Work</span>
     </div>
     <ul class="nav-links">
@@ -398,10 +321,12 @@
  
     <div class="bio-grid">
  
-      <!-- PHOTO COLUMN -->
-      <img src="IMG_1166.jpeg" alt="Jamie Van Dommelen" style="width:100%;height:100%;object-fit:cover;display:block;" />
-        <p class="photo-caption">Jamie Van Dommelen — Tysons, VA</p>
- 
+      <div class="photo-col">
+        <div class="photo-frame">
+          <img src="IMG_1166.jpeg" alt="Jamie Van Dommelen" />
+          <div class="photo-accent"></div>
+        </div>
+        <p class="photo-caption">Jamie Van Dommelen — Washington, DC</p>
         <div class="hats-row">
           <span class="hat-tag">Dog Mom 🐾</span>
           <span class="hat-tag">Solidcore Coach</span>
@@ -412,21 +337,16 @@
         </div>
       </div>
  
-      <!-- BIO COLUMN -->
       <div class="bio-col">
         <h1 class="bio-heading">
           Hi, I'm<br><em>Jamie.</em>
         </h1>
  
         <div class="bio-body">
-          <p>Dog mom, [solidcore] instructor, UI/UX designer, business and product analyst — some of the many hats I am grateful to wear.</p>
- 
+          <p>Dog mom, [solidcore] coach, UI/UX designer, business and product analyst — some of the many hats I am grateful to wear.</p>
           <div class="bio-divider"></div>
- 
           <p>I started my career as a <strong>Business Analyst</strong> that evolved into a <strong>Product Analyst</strong>, and I'm now looking for new opportunities where I can bring both of those worlds together. My background spans federal agencies, financial institutions, and SaaS platforms — always as the person bridging the gap between what a business needs and what a technical team builds.</p>
- 
           <p>I love learning new things. Recently I completed a <strong>full stack software development bootcamp</strong> to sharpen my technical skills and deepen my understanding of how the products I work on actually get built. It reinforced exactly where I love to be — on the business and product side, but with enough technical fluency to speak both languages.</p>
- 
           <p>I also have a genuine passion for <strong>website design and UI/UX</strong> — this site is a little proof of that. Check out my recent projects and feel free to reach out. I'd love to connect.</p>
         </div>
  
@@ -440,8 +360,8 @@
             <div class="stat-label">Industries</div>
           </div>
           <div class="stat">
-            <div class="stat-num">10+</div>
-            <div class="stat-label">Roles Applied</div>
+            <div class="stat-num">3</div>
+            <div class="stat-label">Projects</div>
           </div>
         </div>
  
